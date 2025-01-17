@@ -3,7 +3,7 @@ pipeline {
 	agent {
 		node{
 		label "built-in"
-		customWorkspace "/home/ec2-user"
+		customWorkspace "/home/mayur"
 
 }
 }	     
@@ -23,15 +23,23 @@ pipeline {
 		    stage ("compile") {
 				
 				steps {
-					sh "sudo rm -rf /root/.m2/repository"
-					sh "mvn -f /home/ec2-user/project/pom.xml"
+					sh "sudo rm -rf /home/mayur/.m2/repository"
+					sh "mvn -f /home/mayur/project/pom.xml"
+}
+}					
+
+		    stage ("deploy") {
+				
+				steps {
+					sh "sudo scp -i /home/mayur/test.pem -o StrictHostKeyChecking=no /home/mayur/project/target/LoginWebApp.war ec2-user@172.31.13.159:/home/mayur/server/apache-tomcat-9.0.98/webapps"	
 					
 				
 }
-
 }
 
-		    stage ("deploy") {
+
+
+		    stage ("starting server") {
 			agent {
 			 node {
 			 label "dev"	
@@ -40,19 +48,15 @@ pipeline {
 
 }
 				steps {
-
-					sh "sudo scp -i /home/ec2-user/test.pem -o StrictHostKeyChecking=no /home/ec2-user/project/target/LoginWebApp.war ec2-user@172.31.13.159:/home/ec2-user/server/apache-tomcat-9.0.98/webapps"
-					sh "nohup ./home/ec2-user/server/apache-tomcat-9.0.98/shutdown.sh &"
-					sh "nohup ./home/ec2-user/server/apache-tomcat-9.0.98/startup.sh &"
+		
+					sh "nohup ./home/mayur/servers/apache-tomcat-9.0.98/shutdown.sh &"
+					sh "nohup ./home/mayur/servers/apache-tomcat-9.0.98/startup.sh &"
 }
 
 
 }
 
 }
-
-
-
-
-
 }
+
+

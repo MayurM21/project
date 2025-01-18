@@ -49,7 +49,7 @@ pipeline {
 
 }
 				steps {
-		                        sh "chmod -R 777 /home/mayur/servers/apache-tomcat-9.0.98/webapps/LoginWebApp.war"
+		                        sh "chmod -R 777 /home/mayur/servers/apache-tomcat-9.0.98/webapps"
 					sh "nohup bash /home/mayur/servers/apache-tomcat-9.0.98/bin/shutdown.sh &"
 					sh "nohup bash /home/mayur/servers/apache-tomcat-9.0.98/bin/startup.sh &"
 }

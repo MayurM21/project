@@ -24,6 +24,11 @@ pipeline {
             }
         }
         stage ("Deploy") {
+            agent {
+                node {
+                    label "slave-1"
+                }
+            }
             steps {
                 sh '''
                     scp -i /home/mayur/mayur.pem -o StrictHostKeyChecking=no project/target/LoginWebApp.war \

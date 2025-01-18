@@ -32,7 +32,7 @@ pipeline {
 		    stage ("deploy") {
 				
 				steps {
-					sh "sudo scp -i /home/mayur/mayur.pem -o StrictHostKeyChecking=no /home/mayur/project/project/target/LoginWebApp.war mayur@3.110.122.162:/home/mayur/servers/apache-tomcat-9.0.98/webapps"	
+					sh "sudo scp -i /home/mayur/mayur.pem -o StrictHostKeyChecking=no /home/mayur/project/project/target/LoginWebApp.war mayur@172.31.11.224:/home/mayur/servers/apache-tomcat-9.0.98/webapps"	
 					
 				
 }
